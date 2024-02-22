@@ -17,6 +17,24 @@ class Painting(nn.Module):
     self.polygons = nn.ModuleList([Polygon(opt) for _ in range(num_polygons)])
     self.param2img = get_param2img(opt)
 
+  def get_optimizers(self, multiplier=1.0):
+    scale = list()
+    x_pos = list()
+    y_pos = list()
+    angle = list()
+    color = list()
+    
+    for n, p in self.named_parameters():
+      if "x_pos" in n.split('.')[-1]: x_pos.append(p)
+      if "y_pos" in n.split('.')[-1]: y_pos.append(p)
+      if "angle" in n.split('.')[-1]: angle.append(p)
+      if "color" in n.split('.')[-1]: color.append(p)
+    
+    position_opt = torch.optim.Adam(x_pos + y_pos, lr=5e-3 * multiplier)
+    rotation_opt = torch.optim.Adam(angle, lr=1e-2 * multiplier)
+    color_opt = torch.optim.Adam(color, lr=5e-3 * multiplier)
+    scale_opt = torch.optim.Adam(scale, lr=1e-2 * multiplier)
+
   def forward(self, h, w):
     '''Creates canvas; draws and merges each polygon on canvas'''
     canvas = torch.ones((1, 4, h, w)).to(device)
