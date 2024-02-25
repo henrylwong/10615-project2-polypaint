@@ -37,12 +37,12 @@ class Options(object):
         parser.add_argument('--log_frequency', type=int, default=5, help="Log to TB after this many optim. iters.")
         parser.add_argument("--output_dir", type=str, default="../outputs/", help='Where to write output to.')
         
-        parser.add_argument("--MIN_SIDES", type=int, default=3)
-        parser.add_argument("--MAX_SIDES", type=int, default = 8)
-        parser.add_argument("--MIN_SCALES", type=int, default=0.1)
-        parser.add_argument("--MAX_SCALES", type=int, default = 1.0)
-        parser.add_argument("--MAX_ALPHA", type=int, default=1)
-        parser.add_argument("--MAX_ANGLE", type=int, default = math.pi/6)
+        parser.add_argument("--min_sides", type=int, default=3)
+        parser.add_argument("--max_sides", type=int, default = 8)
+        parser.add_argument("--min_scale", type=float, default=0.1)
+        parser.add_argument("--max_scale", type=float, default = 1.0)
+        parser.add_argument("--max_alpha", type=float, default=1.0)
+        parser.add_argument("--max_angle", type=float, default = math.pi/6)
 
         return parser 
 

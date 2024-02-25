@@ -48,12 +48,12 @@ class Polygon(nn.Module):
     super().__init__()
 
     self.opt = opt
-    self.MIN_SIDES = opt.MIN_SIDES
-    self.MAX_SIDES = opt.MAX_SIDES
-    self.MIN_SCALE = opt.MIN_SCALES
-    self.MAX_SCALE = opt.MAX_SCALES
-    self.MAX_ALPHA = opt.MAX_ALPHA
-    self.MAX_ANGLE = opt.MAX_ANGLE # (math.pi / 6)
+    self.MIN_SIDES = opt.min_sides
+    self.MAX_SIDES = opt.max_sides
+    self.MIN_SCALE = opt.min_scale
+    self.MAX_SCALE = opt.max_scale
+    self.MAX_ALPHA = opt.max_alpha
+    self.MAX_ANGLE = opt.max_angle # (math.pi / 6)
 
     # if num_sides == None:
     #   num_sides = torch.randint(low=self.MIN_SIDES, high=self.MAX_SIDES + 1, size=(1,))
