@@ -37,7 +37,7 @@ class Painting(nn.Module):
   def forward(self, h, w):
     '''Creates canvas; draws and merges each polygon on canvas'''
     canvas = torch.ones((1, 4, h, w)).to(device)
-    opacity_factor = 1.0
+    opacity_factor = 0.8
 
     poly_alphas = list()
     for poly in self.polygons:
