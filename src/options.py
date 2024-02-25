@@ -13,6 +13,7 @@ class Options(object):
         parser.add_argument("--cache_dir", type=str, default='./cache', help='Where to store cached files.')
         parser.add_argument("--image_name", type=str, default='target.png')
         parser.add_argument("--poly_model", type=str, default='tri_train.pt')
+        parser.add_argument("--final_model", type=str, default='final.pt')
 
         # Planning Parameters
         parser.add_argument('--max_height', default=360.0, type=int, help='height of painting')
@@ -26,7 +27,7 @@ class Options(object):
         parser.add_argument('--n_inits', type=int, default = 0)
         parser.add_argument('--intermediate_optim_iter', type=int, default = 40)
         parser.add_argument('--init_optim_iter', type=int, default=400)
-        parser.add_argument('--optim_iter', type=int, default=150)
+        parser.add_argument('--optim_iter', type=int, default=400)
         parser.add_argument('--lr_multiplier', type=float, default=0.2)
         parser.add_argument('--num_augs', type=int, default=30)
 

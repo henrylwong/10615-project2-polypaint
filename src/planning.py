@@ -21,6 +21,7 @@ def get_objective_function(objective_type, target, p, weight=1.0):
 def plan(opt, n_strokes, h, w):
     painting = Painting(opt, n_strokes).to(device)
     target_img = image_to_tensor(opt.img_path)
+    target_img = target_img.to(device)
     
     # # Getting best initial copy
     # init_painting = copy.deepcopy(painting.cpu())
@@ -69,8 +70,9 @@ def plan(opt, n_strokes, h, w):
 
         print(f"Epoch {i + 1}: Loss = {loss}")
         if i % 10 == 0:
-          tensor_to_image(p, os.path.join(opt.cache_dir, f"img/epoch[{i}]_time[{time.time()}].png"))
-
+          tensor_to_image(p.cpu(), os.path.join(opt.cache_dir, f"img/epoch[{i}]_time[{time.time()}].png"))
+        if i % 50 == 0:
+          torch.save(painting.state_dict(), os.path.join(opt.cache_dir, opt.final_model))
     return painting
 
 if __name__ == '__main__':
@@ -85,7 +87,8 @@ if __name__ == '__main__':
     painting = plan(opt, opt.num_polygons, h, w)
     
     with torch.no_grad():
-        save_image(painting(h,w), os.path.join(opt.cache_dir, 'init_painting_plan{}.png'.format(str(time.time()))))
+        # save_image(painting(h,w), os.path.join(opt.cache_dir, 'init_painting_plan{}.png'.format(str(time.time()))))
+        tensor_to_image(painting(h, w)[0].cpu(), os.path.join(opt.cache_dir, f"img/final_time[{time.time()}].png")) 
     
     f = open(os.path.join(opt.cache_dir, "poly_order.csv"), "w")
     f.write(painting.to_csv())

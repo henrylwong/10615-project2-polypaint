@@ -81,10 +81,11 @@ class Polygon(nn.Module):
     param2img.load_state_dict(torch.load(os.path.join(self.opt.cache_dir, self.opt.poly_model), map_location=device))
     param2img.eval()
     param2img.to(device)
-    
+
     # Generate polygon
-    img = torch.tensor([self.scale]).unsqueeze(0)
-    x = Polygon.pad_img(img, h, w, param2img).unsqueeze(1)
+    param = torch.tensor([self.scale]).unsqueeze(0)
+    param = param.to(device)
+    x = Polygon.pad_img(param, h, w, param2img).unsqueeze(1)
 
     # Apply x/y position and angle transformation
     x = self.transformation(x)
