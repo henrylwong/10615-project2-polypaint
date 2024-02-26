@@ -1,12 +1,8 @@
-### 10-615 Art/ML Project 2
+### 10-615 Art/ML Project 2: Poly Paint
 
-#### TODO
-- look at loss function (parse_objective())
-- look at generate_poly()
-- finish rigidbodytransforation, color
-- why does plan() have 3 indiv training loops?
+This project aims to reconstruct images using polygons.
 
-- validate_poly() /make valid
-- get pretrained model in and pad it to the canvas
-- maybe filter our unwanted?
-- visualize plan
+### Improvements:
+- evenly spaced initialization
+- potential adding to hot spots?
+- add loss for places with no triangles (due to white/blank)
